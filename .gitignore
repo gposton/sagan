@@ -1,3 +1,4 @@
 *.tfstate
 *.tfstate.*
 Gemfile.lock
+*_override.tf
