@@ -24,6 +24,12 @@ The process is as follows:
 
 Given the terraform apply has been ran with the example template...
 
+Set your AWS keys:
+```
+➜  sagan git:(master) ✗ export AWS_ACCESS_KEY_ID=<key>
+➜  sagan git:(master) ✗ export AWS_SECRET_ACCESS_KEY=<secret>
+```
+
 Remove the reference to the ASG and Launch config from terraform state
 file:
 
@@ -34,7 +40,7 @@ Removed the following asg from example_template/terraform.tfstate:
 web_ami-2593a715
 ```
 
-NOTE THE ASG ID, YOU'LL NEED THIS LATER
+Note the asg id above... you'll need this later (to take it out of service)
 
 Run terraform apply to create the new ASG and launch config:
 
