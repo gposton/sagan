@@ -24,10 +24,13 @@ The process is as follows:
 
 Given the terraform apply has been ran with the example template...
 
-Set your AWS keys:
+Set your AWS keys and install gem dependencies:
+
 ```
 ➜  sagan git:(master) ✗ export AWS_ACCESS_KEY_ID=<key>
 ➜  sagan git:(master) ✗ export AWS_SECRET_ACCESS_KEY=<secret>
+➜  sagan git:(master) ✗ sudo gem install bundler
+➜  sagan git:(master) ✗ bundle
 ```
 
 Remove the reference to the ASG and Launch config from terraform state
