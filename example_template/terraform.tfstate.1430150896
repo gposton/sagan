@@ -1,0 +1,142 @@
+{
+    "version": 1,
+    "serial": 2,
+    "modules": [
+        {
+            "path": [
+                "root"
+            ],
+            "outputs": {},
+            "resources": {
+                "aws_autoscaling_group.asg": {
+                    "type": "aws_autoscaling_group",
+                    "depends_on": [
+                        "aws_elb.web_lb",
+                        "aws_launch_configuration.launch_config"
+                    ],
+                    "primary": {
+                        "id": "web_ami-c1a194f1",
+                        "attributes": {
+                            "availability_zones.#": "3",
+                            "availability_zones.2050015877": "us-west-2c",
+                            "availability_zones.221770259": "us-west-2b",
+                            "availability_zones.2487133097": "us-west-2a",
+                            "default_cooldown": "300",
+                            "desired_capacity": "3",
+                            "force_delete": "true",
+                            "health_check_grace_period": "300",
+                            "health_check_type": "EC2",
+                            "id": "web_ami-c1a194f1",
+                            "launch_configuration": "terraform-XuuMoVHyg0iWzr5Ol88bmenqh4U=",
+                            "load_balancers.#": "1",
+                            "load_balancers.2044252648": "web-elb",
+                            "max_size": "3",
+                            "min_size": "3",
+                            "name": "web_ami-c1a194f1",
+                            "tag.#": "0",
+                            "termination_policies.#": "1",
+                            "termination_policies.753088835": "Default",
+                            "vpc_zone_identifier.#": "3",
+                            "vpc_zone_identifier.1076056661": "subnet-ff9243a6",
+                            "vpc_zone_identifier.2394771580": "subnet-682f9c1f",
+                            "vpc_zone_identifier.653328044": "subnet-2672ef43"
+                        }
+                    }
+                },
+                "aws_elb.web_lb": {
+                    "type": "aws_elb",
+                    "depends_on": [
+                        "aws_security_group.web_server"
+                    ],
+                    "primary": {
+                        "id": "web-elb",
+                        "attributes": {
+                            "availability_zones.#": "3",
+                            "availability_zones.2050015877": "us-west-2c",
+                            "availability_zones.221770259": "us-west-2b",
+                            "availability_zones.2487133097": "us-west-2a",
+                            "dns_name": "internal-web-elb-817214951.us-west-2.elb.amazonaws.com",
+                            "health_check.#": "1",
+                            "health_check.3542944977.healthy_threshold": "2",
+                            "health_check.3542944977.interval": "10",
+                            "health_check.3542944977.target": "HTTP:80/",
+                            "health_check.3542944977.timeout": "3",
+                            "health_check.3542944977.unhealthy_threshold": "2",
+                            "id": "web-elb",
+                            "instances.#": "3",
+                            "instances.1610340188": "i-56e078a0",
+                            "instances.1996279988": "i-d8fcd211",
+                            "instances.4274145823": "i-17be76e0",
+                            "internal": "true",
+                            "listener.#": "1",
+                            "listener.3057123346.instance_port": "80",
+                            "listener.3057123346.instance_protocol": "http",
+                            "listener.3057123346.lb_port": "80",
+                            "listener.3057123346.lb_protocol": "http",
+                            "listener.3057123346.ssl_certificate_id": "",
+                            "name": "web-elb",
+                            "security_groups.#": "1",
+                            "security_groups.3923566212": "sg-fcccc799",
+                            "subnets.#": "3",
+                            "subnets.1076056661": "subnet-ff9243a6",
+                            "subnets.2394771580": "subnet-682f9c1f",
+                            "subnets.653328044": "subnet-2672ef43"
+                        }
+                    }
+                },
+                "aws_launch_configuration.launch_config": {
+                    "type": "aws_launch_configuration",
+                    "depends_on": [
+                        "aws_security_group.web_server"
+                    ],
+                    "primary": {
+                        "id": "terraform-XuuMoVHyg0iWzr5Ol88bmenqh4U=",
+                        "attributes": {
+                            "associate_public_ip_address": "false",
+                            "ebs_block_device.#": "0",
+                            "ebs_optimized": "false",
+                            "ephemeral_block_device.#": "0",
+                            "id": "terraform-XuuMoVHyg0iWzr5Ol88bmenqh4U=",
+                            "image_id": "ami-c1a194f1",
+                            "instance_type": "t2.micro",
+                            "key_name": "ClearCareVPC",
+                            "name": "terraform-XuuMoVHyg0iWzr5Ol88bmenqh4U=",
+                            "root_block_device.#": "0",
+                            "security_groups.#": "1",
+                            "security_groups.3923566212": "sg-fcccc799"
+                        }
+                    }
+                },
+                "aws_security_group.web_server": {
+                    "type": "aws_security_group",
+                    "primary": {
+                        "id": "sg-fcccc799",
+                        "attributes": {
+                            "description": "Used for all web servers",
+                            "egress.#": "0",
+                            "id": "sg-fcccc799",
+                            "ingress.#": "2",
+                            "ingress.179083333.cidr_blocks.#": "1",
+                            "ingress.179083333.cidr_blocks.0": "10.0.0.0/8",
+                            "ingress.179083333.from_port": "22",
+                            "ingress.179083333.protocol": "tcp",
+                            "ingress.179083333.security_groups.#": "0",
+                            "ingress.179083333.self": "false",
+                            "ingress.179083333.to_port": "22",
+                            "ingress.3873181818.cidr_blocks.#": "1",
+                            "ingress.3873181818.cidr_blocks.0": "10.0.0.0/8",
+                            "ingress.3873181818.from_port": "80",
+                            "ingress.3873181818.protocol": "tcp",
+                            "ingress.3873181818.security_groups.#": "0",
+                            "ingress.3873181818.self": "false",
+                            "ingress.3873181818.to_port": "80",
+                            "name": "web_server",
+                            "owner_id": "497934108949",
+                            "vpc_id": "vpc-464acf23"
+                        }
+                    }
+                }
+            }
+        }
+    ]
+}
