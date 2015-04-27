@@ -39,4 +39,6 @@ required_options.each do |option|
 end
 
 auto_scaling = Aws::AutoScaling::Client.new(region: options['region'])
+launch_configuration_name = auto_scaling.describe_auto_scaling_groups(auto_scaling_group_names: [options['asg']]).auto_scaling_groups[0].launch_configuration_name
 auto_scaling.delete_auto_scaling_group(auto_scaling_group_name: options['asg'], force_delete: true)
+auto_scaling.delete_launch_configuration(launch_configuration_name: launch_configuration_name)
