@@ -49,6 +49,9 @@ resource "aws_launch_configuration" "launch_config" {
   instance_type   = "${var.instance_size}"
   security_groups = ["${aws_security_group.web_server.id}"]
   key_name        = "${var.key_name}"
+  lifecycle {
+    create_before_destroy = true
+  }
 }
 
 resource "aws_autoscaling_group" "asg" {
